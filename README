@@ -2,7 +2,7 @@ NAME
     String::Trim::More - Various string trimming utilities
 
 VERSION
-    This document describes version 0.01 of String::Trim::More (from Perl
+    This document describes version 0.02 of String::Trim::More (from Perl
     distribution String-Trim-More), released on 2014-12-10.
 
 DESCRIPTION
@@ -44,6 +44,11 @@ FUNCTIONS
   trim_blank_lines($str) => STR
     Trim blank lines at the beginning and the end. Won't trim blank lines in
     the middle. Blank lines include lines with only whitespaces in them.
+
+  ellipsis($str[, $maxlen, $ellipsis]) => STR
+    Return $str unmodified if $str's length is less than $maxlen (default
+    80). Otherwise cut $str to ($maxlen - length($ellipsis)) and append
+    $ellipsis (default '...') at the end.
 
 SEE ALSO
     String::Trim, Text::Trim, String::Strip, String::Util.

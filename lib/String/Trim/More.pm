@@ -1,7 +1,7 @@
 package String::Trim::More;
 
 our $DATE = '2014-12-10'; # DATE
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 use 5.010001;
 use strict;
@@ -17,6 +17,8 @@ our @EXPORT_OK = qw(
                        rtrim_lines
                        trim_lines
                        trim_blank_lines
+
+                       ellipsis
                );
 
 sub ltrim {
@@ -65,6 +67,18 @@ sub trim_blank_lines {
     $_;
 }
 
+sub ellipsis {
+    my ($str, $maxlen, $ellipsis) = @_;
+    $maxlen   //= 80;
+    $ellipsis //= "...";
+
+    if (length($str) <= $maxlen) {
+        return $str;
+    } else {
+        return substr($str, 0, $maxlen-length($ellipsis)) . $ellipsis;
+    }
+}
+
 1;
 # ABSTRACT: Various string trimming utilities
 
@@ -80,7 +94,7 @@ String::Trim::More - Various string trimming utilities
 
 =head1 VERSION
 
-This document describes version 0.01 of String::Trim::More (from Perl distribution String-Trim-More), released on 2014-12-10.
+This document describes version 0.02 of String::Trim::More (from Perl distribution String-Trim-More), released on 2014-12-10.
 
 =head1 DESCRIPTION
 
@@ -128,6 +142,12 @@ ltrim_lines + rtrim_lines.
 
 Trim blank lines at the beginning and the end. Won't trim blank lines in the
 middle. Blank lines include lines with only whitespaces in them.
+
+=head2 ellipsis($str[, $maxlen, $ellipsis]) => STR
+
+Return $str unmodified if $str's length is less than $maxlen (default 80).
+Otherwise cut $str to ($maxlen - length($ellipsis)) and append $ellipsis
+(default '...') at the end.
 
 =head1 SEE ALSO
 
